@@ -1,0 +1,92 @@
+=======================================================================
+TASK 4: COMPREHENSIVE PERFORMANCE ANALYSIS
+=======================================================================
+Experiment: Congestion Scenario with Multiple Senders and Receivers
+Date: $(date)
+
+This analysis compares the performance of three load balancing algorithms
+(ECMP, REPS, Oblivious) under realistic datacenter congestion conditions.
+
+Traffic Pattern:
+  - 32 total flows with mixed sizes (20MB to 150MB)
+  - Multiple incast patterns (hotspot receivers)
+  - Permutation traffic (distributed flows)
+  - Temporal overlap (staggered start times)
+
+Performance Metrics:
+  1. Flow Completion Time (FCT)
+  2. Queue Length Variance
+
+=======================================================================
+
+=======================================================================
+FLOW COMPLETION TIME (FCT) COMPARISON
+=======================================================================
+
+
+=======================================================================
+QUEUE LENGTH VARIANCE COMPARISON
+=======================================================================
+
+
+=======================================================================
+COMPARATIVE SUMMARY TABLE
+=======================================================================
+
+Algorithm          Mean FCT (ms)    P95 FCT (ms)    Spatial Var.     Max Queue
+----------------   --------------   -------------   -------------   -----------
+ecmp               38.55            97.19           949.79          22152.00    
+reps               20.32            37.00           349.73          48000.00    
+oblivious          24.33            40.83           1764.65         76500.00    
+
+=======================================================================
+ANALYSIS INTERPRETATION GUIDE
+=======================================================================
+
+Flow Completion Time (FCT):
+  - Lower Mean FCT: Better average performance
+  - Lower P95 FCT: More consistent performance, fewer stragglers
+  - Lower variance in FCT: More predictable flow completion
+
+Spatial Variance (Load Balancing Metric):
+  - Variance AMONG switches (not over time)
+  - Lower Spatial Variance: More evenly distributed load across switches
+  - Lower Max Queue: Better congestion management
+  - Measures how balanced the load is across the network
+
+Expected Algorithm Characteristics:
+  - ECMP: Simple hash-based routing, may create hotspots
+  - REPS: Adaptive routing, should balance load better across switches
+  - Oblivious: Random path selection, theoretical load balance
+
+=======================================================================
+RESULTS INTERPRETATION
+=======================================================================
+
+Based on your results above, analyze:
+
+1. Which algorithm achieved the lowest mean and P95 FCT?
+   → This indicates the best overall and tail performance
+
+2. Which algorithm had the lowest spatial variance?
+   → This indicates the best load balancing (most evenly distributed)
+
+3. Are there trade-offs between FCT and spatial variance?
+   → Some algorithms may achieve fast FCT by concentrating traffic
+
+4. How do incast patterns affect each algorithm?
+   → Compare FCT variance within incast groups across algorithms
+
+5. Does the congestion scenario reveal algorithm weaknesses?
+   → Look for algorithms that struggle with specific traffic patterns
+
+=======================================================================
+DETAILED RESULTS
+=======================================================================
+
+For detailed per-flow and per-switch results, see:
+  - results/fct_<algorithm>.txt (Flow-level FCT statistics)
+  - results/queue_variance_<algorithm>.txt (Switch-level queue statistics)
+
+=======================================================================
+

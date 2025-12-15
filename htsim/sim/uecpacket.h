@@ -2,6 +2,7 @@
 #ifndef UECPACKET_H
 #define UECPACKET_H
 
+#include <algorithm>
 #include <cstdint>
 #include <list>
 #include <optional>
@@ -18,6 +19,7 @@
 class UecBasePacket : public Packet {
 public:
     enum PacketType {DATA_PULL = 0, DATA_SPEC = 1, DATA_RTX = 2, DATA_PROBE = 3};    
+    enum CongestionField { CONG_UNKNOWN = 0, CONG_MIN = 0, CONG_MAX = 7 };
     typedef uint64_t seq_t;
     typedef uint64_t pull_quanta;  // actual pull fields are typically
                                    // uint16_t, but we'll use 64 bits
@@ -34,6 +36,15 @@ public:
     static pull_quanta quantize_floor(mem_b bytes); // quantize and round down
     static mem_b unquantize(pull_quanta credit_chunks);  // unquantize
     static mem_b get_ack_size() {return ACKSIZE;}
+    inline uint8_t max_congestion_level() const {return _max_congestion_level;}
+    inline void reset_congestion_level() { _max_congestion_level = CONG_UNKNOWN; }
+    inline void update_congestion_level(uint8_t level) {
+        if (level > _max_congestion_level) {
+            _max_congestion_level = level;
+        }
+    }
+protected:
+    uint8_t _max_congestion_level = CONG_UNKNOWN;
 };
 
 class UecDataPacket : public UecBasePacket {
@@ -67,6 +78,7 @@ public:
         p->_path_len = route.size();
         p->_trim_hop = {};
         p->_trim_direction = NONE;
+        p->reset_congestion_level();
 
         return p;
     }
@@ -110,6 +122,10 @@ public:
 
     inline int32_t trim_hop() const {return _trim_hop.value_or(INT32_MAX);}
     inline packet_direction trim_direction() const {return _trim_direction;}
+    inline uint8_t max_congestion_level() const {return _max_congestion_level;}
+    inline void update_congestion_level(uint8_t level) {
+        _max_congestion_level = std::max<uint8_t>(_max_congestion_level, level);
+    }
 
     inline int32_t path_id() const {if (_pathid!=UINT32_MAX) return _pathid; else return _route->path_id();}
 
@@ -164,6 +180,7 @@ public:
         p->_pathid = ev;
         //p->_rnr = rnr;
         p->_slow_pull = false;
+        p->reset_congestion_level();
         return p;
     }    
 
@@ -215,6 +232,7 @@ public:
         p->_sack_bitmap = 0;
         p->_ecn_echo = ecn_marked;
         p->set_dst(destination);
+        p->reset_congestion_level();
 
         p->_recvd_bytes = recv_bytes;
         p->_rcv_cwnd_pen = rcv_wnd_pen;
@@ -303,6 +321,7 @@ public:
         p->_recvd_bytes = recv_bytes;
         p->_target_bytes = tbytes;
         p->_last_hop = false;
+        p->reset_congestion_level();
 
         return p;
     }

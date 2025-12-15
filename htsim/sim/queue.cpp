@@ -4,6 +4,7 @@
 #include "queue.h"
 #include "ndppacket.h"
 #include "queue_lossless.h"
+#include "uecpacket.h"
 
 simtime_picosec BaseQueue::_update_period = timeFromUs(0.1);
 
@@ -18,6 +19,18 @@ BaseQueue::BaseQueue(linkspeed_bps bitrate, EventList& eventlist, QueueLogger* l
     _last_update_utilization = 0;
     _last_qs = 0;
     _last_utilization = 0;
+}
+
+static inline void update_congestion_field(BaseQueue* queue, Packet& pkt) {
+    auto uec_pkt = dynamic_cast<UecBasePacket*>(&pkt);
+    if (!uec_pkt) {
+        return;
+    }
+    uint64_t level = queue->quantized_queuesize();
+    if (level > UecBasePacket::CONG_MAX) {
+        level = UecBasePacket::CONG_MAX;
+    }
+    uec_pkt->update_congestion_level(static_cast<uint8_t>(level));
 }
 
 void 
@@ -182,6 +195,8 @@ Queue::receivePacket(Packet& pkt)
     }
     pkt.flow().logTraffic(pkt, *this, TrafficLogger::PKT_ARRIVE);
 
+    update_congestion_field(this, pkt);
+
     /* enqueue the packet */
     bool queueWasEmpty = _enqueued.empty();
     //_enqueued.push_front(&pkt);
@@ -294,6 +309,7 @@ PriorityQueue::receivePacket(Packet& pkt)
 
     queue_priority_t prio = getPriority(pkt);
     pkt.flow().logTraffic(pkt, *this, TrafficLogger::PKT_ARRIVE);
+    update_congestion_field(this, pkt);
 
     /* enqueue the packet */
     bool queueWasEmpty = false;
@@ -471,6 +487,7 @@ FairPriorityQueue::receivePacket(Packet& pkt)
 
     queue_priority_t prio = getPriority(pkt);
     pkt.flow().logTraffic(pkt, *this, TrafficLogger::PKT_ARRIVE);
+    update_congestion_field(this, pkt);
 
     /* enqueue the packet */
     bool queueWasEmpty = false;

@@ -23,7 +23,10 @@ UecMpOblivious::UecMpOblivious(uint16_t no_of_paths,
             << endl;
 }
 
-void UecMpOblivious::processEv(uint16_t path_id, PathFeedback feedback) {
+void UecMpOblivious::processEv(uint16_t path_id, PathFeedback feedback, uint8_t congestion_level) {
+    (void)path_id;
+    (void)feedback;
+    (void)congestion_level;
     return;
 }
 
@@ -72,7 +75,8 @@ UecMpBitmap::UecMpBitmap(uint16_t no_of_paths, bool debug)
             << endl;
 }
 
-void UecMpBitmap::processEv(uint16_t path_id, PathFeedback feedback) {
+void UecMpBitmap::processEv(uint16_t path_id, PathFeedback feedback, uint8_t congestion_level) {
+    (void)congestion_level;
     // _no_of_paths must be a power of 2
     uint16_t mask = _no_of_paths - 1;
     path_id &= mask;  // only take the relevant bits for an index
@@ -149,7 +153,8 @@ UecMpReps::UecMpReps(uint16_t no_of_paths, bool debug, bool is_trimming_enabled)
             << endl;
 }
 
-void UecMpReps::processEv(uint16_t path_id, PathFeedback feedback) {
+void UecMpReps::processEv(uint16_t path_id, PathFeedback feedback, uint8_t congestion_level) {
+    (void)congestion_level;
 
     if ((feedback == PATH_TIMEOUT) && !circular_buffer_reps->isFrozenMode() && circular_buffer_reps->explore_counter == 0) {
         if (_is_trimming_enabled) { // If we have trimming enabled
@@ -195,6 +200,66 @@ uint16_t UecMpReps::nextEntropy(uint64_t seq_sent, uint64_t cur_cwnd_in_pkts) {
     }
 }
 
+UecMpRepsSmart::UecMpRepsSmart(uint16_t no_of_paths, bool debug)
+    : UecMultipath(debug),
+      _no_of_paths(no_of_paths),
+      _max_congestion_level(7) {
+
+    if (_debug) {
+        cout << "Multipath"
+            << " REPS_SMART"
+            << " _no_of_paths " << _no_of_paths
+            << " max_congestion_level " << (uint32_t)_max_congestion_level
+            << endl;
+    }
+}
+
+void UecMpRepsSmart::processEv(uint16_t path_id, PathFeedback feedback, uint8_t congestion_level) {
+    if (_no_of_paths == 0) {
+        return;
+    }
+
+    uint16_t normalized_ev = path_id % _no_of_paths;
+    uint8_t level = std::min<uint8_t>(congestion_level, _max_congestion_level);
+
+    switch (feedback) {
+        case PATH_TIMEOUT:
+        case PATH_NACK:
+            level = _max_congestion_level;
+            break;
+        case PATH_ECN:
+            level = std::max<uint8_t>(level, 1);
+            break;
+        case PATH_GOOD:
+        default:
+            break;
+    }
+
+    auto existing = _ev_level.find(normalized_ev);
+    if (existing != _ev_level.end()) {
+        auto &old_bucket = _ev_buckets[existing->second];
+        old_bucket.erase(std::remove(old_bucket.begin(), old_bucket.end(), normalized_ev), old_bucket.end());
+    }
+
+    _ev_level[normalized_ev] = level;
+    _ev_buckets[level].push_back(normalized_ev);
+}
+
+uint16_t UecMpRepsSmart::nextEntropy(uint64_t /*seq_sent*/, uint64_t /*cur_cwnd_in_pkts*/) {
+    for (uint8_t level = 0; level <= _max_congestion_level; level++) {
+        auto &bucket = _ev_buckets[level];
+        if (!bucket.empty()) {
+            size_t idx = rand() % bucket.size();
+            uint16_t ev = bucket[idx];
+            bucket.erase(bucket.begin() + idx);
+            _ev_level.erase(ev);
+            return ev;
+        }
+    }
+
+    return rand() % _no_of_paths;
+}
+
 
 UecMpRepsLegacy::UecMpRepsLegacy(uint16_t no_of_paths, bool debug)
     : UecMultipath(debug),
@@ -208,7 +273,8 @@ UecMpRepsLegacy::UecMpRepsLegacy(uint16_t no_of_paths, bool debug)
             << endl;
 }
 
-void UecMpRepsLegacy::processEv(uint16_t path_id, PathFeedback feedback) {
+void UecMpRepsLegacy::processEv(uint16_t path_id, PathFeedback feedback, uint8_t congestion_level) {
+    (void)congestion_level;
     if (feedback == PATH_GOOD){
         _next_pathid.push_back(path_id);
         if (_debug){
@@ -273,9 +339,9 @@ void UecMpMixed::set_debug_tag(string debug_tag) {
     _reps_legacy.set_debug_tag(debug_tag);
 }
 
-void UecMpMixed::processEv(uint16_t path_id, PathFeedback feedback) {
-    _bitmap.processEv(path_id, feedback);
-    _reps_legacy.processEv(path_id, feedback);
+void UecMpMixed::processEv(uint16_t path_id, PathFeedback feedback, uint8_t congestion_level) {
+    _bitmap.processEv(path_id, feedback, congestion_level);
+    _reps_legacy.processEv(path_id, feedback, congestion_level);
 }
 
 uint16_t UecMpMixed::nextEntropy(uint64_t seq_sent, uint64_t cur_cwnd_in_pkts) {
@@ -298,7 +364,10 @@ UecMpEcmp::UecMpEcmp(uint16_t no_of_paths, bool debug)
     _crt_path = rand() % no_of_paths;
 }
 
-void UecMpEcmp::processEv(uint16_t path_id, PathFeedback feedback) {
+void UecMpEcmp::processEv(uint16_t path_id, PathFeedback feedback, uint8_t congestion_level) {
+    (void)path_id;
+    (void)feedback;
+    (void)congestion_level;
     // No OP in ECMP
     return;
 }

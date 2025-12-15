@@ -1,0 +1,344 @@
+======================================================================
+Flow Completion Time (FCT) Analysis - Task 4
+======================================================================
+Output File: /Users/zhouzhixiang/Library/CloudStorage/OneDrive-个人/high speed/spcl_HTSIM/htsim/sim/datacenter/assignment2/task4/results/congestion_reps_smart.out
+Connection Matrix: congestion_scenario.cm
+
+Expected Flows: 32
+Completed Flows: 32
+
+======================================================================
+Individual Flow Results
+======================================================================
+
+Flow 1: flow_0_16
+  Route: 0 -> 16
+  Size: 50,000,000 bytes (47.68 MB)
+  FCT: 99984.40 us (99.98 ms)
+  Throughput: 4.00 Gbps
+  Time: 13.50 -> 99997.90 us
+  DCTCP Events: 17490
+
+Flow 2: flow_1_16
+  Route: 1 -> 16
+  Size: 50,000,000 bytes (47.68 MB)
+  FCT: 60127.76 us (60.13 ms)
+  Throughput: 6.65 Gbps
+  Time: 13.74 -> 60141.50 us
+  DCTCP Events: 17658
+
+Flow 3: flow_2_16
+  Route: 2 -> 16
+  Size: 50,000,000 bytes (47.68 MB)
+  FCT: 98812.08 us (98.81 ms)
+  Throughput: 4.05 Gbps
+  Time: 13.62 -> 98825.70 us
+  DCTCP Events: 21266
+
+Flow 4: flow_3_16
+  Route: 3 -> 16
+  Size: 50,000,000 bytes (47.68 MB)
+  FCT: 99984.36 us (99.98 ms)
+  Throughput: 4.00 Gbps
+  Time: 14.94 -> 99999.30 us
+  DCTCP Events: 18486
+
+Flow 5: flow_4_32
+  Route: 4 -> 32
+  Size: 50,000,000 bytes (47.68 MB)
+  FCT: 99986.30 us (99.99 ms)
+  Throughput: 4.00 Gbps
+  Time: 13.50 -> 99999.80 us
+  DCTCP Events: 18810
+
+Flow 6: flow_5_32
+  Route: 5 -> 32
+  Size: 50,000,000 bytes (47.68 MB)
+  FCT: 99976.08 us (99.98 ms)
+  Throughput: 4.00 Gbps
+  Time: 13.62 -> 99989.70 us
+  DCTCP Events: 15145
+
+Flow 7: flow_6_32
+  Route: 6 -> 32
+  Size: 50,000,000 bytes (47.68 MB)
+  FCT: 99981.76 us (99.98 ms)
+  Throughput: 4.00 Gbps
+  Time: 13.74 -> 99995.50 us
+  DCTCP Events: 20133
+
+Flow 8: flow_7_32
+  Route: 7 -> 32
+  Size: 50,000,000 bytes (47.68 MB)
+  FCT: 93168.82 us (93.17 ms)
+  Throughput: 4.29 Gbps
+  Time: 13.98 -> 93182.80 us
+  DCTCP Events: 19805
+
+Flow 9: flow_8_48
+  Route: 8 -> 48
+  Size: 100,000,000 bytes (95.37 MB)
+  FCT: 99880.60 us (99.88 ms)
+  Throughput: 8.01 Gbps
+  Time: 100.00 -> 99980.60 us
+  DCTCP Events: 18426
+
+Flow 10: flow_9_48
+  Route: 9 -> 48
+  Size: 100,000,000 bytes (95.37 MB)
+  FCT: 99865.70 us (99.87 ms)
+  Throughput: 8.01 Gbps
+  Time: 100.00 -> 99965.70 us
+  DCTCP Events: 18276
+
+Flow 11: flow_10_48
+  Route: 10 -> 48
+  Size: 100,000,000 bytes (95.37 MB)
+  FCT: 99888.30 us (99.89 ms)
+  Throughput: 8.01 Gbps
+  Time: 100.00 -> 99988.30 us
+  DCTCP Events: 19733
+
+Flow 12: flow_11_48
+  Route: 11 -> 48
+  Size: 100,000,000 bytes (95.37 MB)
+  FCT: 99892.10 us (99.89 ms)
+  Throughput: 8.01 Gbps
+  Time: 100.00 -> 99992.10 us
+  DCTCP Events: 18837
+
+Flow 13: flow_12_64
+  Route: 12 -> 64
+  Size: 100,000,000 bytes (95.37 MB)
+  FCT: 99895.80 us (99.90 ms)
+  Throughput: 8.01 Gbps
+  Time: 100.00 -> 99995.80 us
+  DCTCP Events: 20562
+
+Flow 14: flow_13_64
+  Route: 13 -> 64
+  Size: 100,000,000 bytes (95.37 MB)
+  FCT: 99896.40 us (99.90 ms)
+  Throughput: 8.01 Gbps
+  Time: 100.00 -> 99996.40 us
+  DCTCP Events: 23777
+
+Flow 15: flow_14_64
+  Route: 14 -> 64
+  Size: 100,000,000 bytes (95.37 MB)
+  FCT: 99892.60 us (99.89 ms)
+  Throughput: 8.01 Gbps
+  Time: 100.00 -> 99992.60 us
+  DCTCP Events: 25631
+
+Flow 16: flow_15_64
+  Route: 15 -> 64
+  Size: 100,000,000 bytes (95.37 MB)
+  FCT: 99898.30 us (99.90 ms)
+  Throughput: 8.01 Gbps
+  Time: 100.00 -> 99998.30 us
+  DCTCP Events: 24432
+
+Flow 17: flow_17_80
+  Route: 17 -> 80
+  Size: 20,000,000 bytes (19.07 MB)
+  FCT: 11186.20 us (11.19 ms)
+  Throughput: 14.30 Gbps
+  Time: 200.00 -> 11386.20 us
+  DCTCP Events: 5079
+
+Flow 18: flow_18_81
+  Route: 18 -> 81
+  Size: 20,000,000 bytes (19.07 MB)
+  FCT: 11521.30 us (11.52 ms)
+  Throughput: 13.89 Gbps
+  Time: 200.00 -> 11721.30 us
+  DCTCP Events: 4948
+
+Flow 19: flow_19_82
+  Route: 19 -> 82
+  Size: 20,000,000 bytes (19.07 MB)
+  FCT: 10339.90 us (10.34 ms)
+  Throughput: 15.47 Gbps
+  Time: 200.00 -> 10539.90 us
+  DCTCP Events: 5505
+
+Flow 20: flow_20_83
+  Route: 20 -> 83
+  Size: 20,000,000 bytes (19.07 MB)
+  FCT: 10995.60 us (11.00 ms)
+  Throughput: 14.55 Gbps
+  Time: 200.00 -> 11195.60 us
+  DCTCP Events: 5620
+
+Flow 21: flow_21_84
+  Route: 21 -> 84
+  Size: 20,000,000 bytes (19.07 MB)
+  FCT: 11483.50 us (11.48 ms)
+  Throughput: 13.93 Gbps
+  Time: 200.00 -> 11683.50 us
+  DCTCP Events: 5324
+
+Flow 22: flow_22_85
+  Route: 22 -> 85
+  Size: 20,000,000 bytes (19.07 MB)
+  FCT: 11625.30 us (11.63 ms)
+  Throughput: 13.76 Gbps
+  Time: 200.00 -> 11825.30 us
+  DCTCP Events: 4666
+
+Flow 23: flow_23_86
+  Route: 23 -> 86
+  Size: 20,000,000 bytes (19.07 MB)
+  FCT: 10844.50 us (10.84 ms)
+  Throughput: 14.75 Gbps
+  Time: 200.00 -> 11044.50 us
+  DCTCP Events: 5000
+
+Flow 24: flow_24_87
+  Route: 24 -> 87
+  Size: 20,000,000 bytes (19.07 MB)
+  FCT: 11066.90 us (11.07 ms)
+  Throughput: 14.46 Gbps
+  Time: 200.00 -> 11266.90 us
+  DCTCP Events: 5391
+
+Flow 25: flow_33_96
+  Route: 33 -> 96
+  Size: 150,000,000 bytes (143.05 MB)
+  FCT: 66596.80 us (66.60 ms)
+  Throughput: 18.02 Gbps
+  Time: 300.00 -> 66896.80 us
+  DCTCP Events: 33672
+
+Flow 26: flow_34_97
+  Route: 34 -> 97
+  Size: 150,000,000 bytes (143.05 MB)
+  FCT: 66678.20 us (66.68 ms)
+  Throughput: 18.00 Gbps
+  Time: 300.00 -> 66978.20 us
+  DCTCP Events: 34119
+
+Flow 27: flow_35_98
+  Route: 35 -> 98
+  Size: 150,000,000 bytes (143.05 MB)
+  FCT: 67107.60 us (67.11 ms)
+  Throughput: 17.88 Gbps
+  Time: 300.00 -> 67407.60 us
+  DCTCP Events: 33402
+
+Flow 28: flow_36_99
+  Route: 36 -> 99
+  Size: 150,000,000 bytes (143.05 MB)
+  FCT: 64515.60 us (64.52 ms)
+  Throughput: 18.60 Gbps
+  Time: 300.00 -> 64815.60 us
+  DCTCP Events: 35337
+
+Flow 29: flow_49_100
+  Route: 49 -> 100
+  Size: 80,000,000 bytes (76.29 MB)
+  FCT: 49996.40 us (50.00 ms)
+  Throughput: 12.80 Gbps
+  Time: 400.00 -> 50396.40 us
+  DCTCP Events: 23999
+
+Flow 30: flow_50_101
+  Route: 50 -> 101
+  Size: 80,000,000 bytes (76.29 MB)
+  FCT: 53200.80 us (53.20 ms)
+  Throughput: 12.03 Gbps
+  Time: 400.00 -> 53600.80 us
+  DCTCP Events: 25141
+
+Flow 31: flow_51_102
+  Route: 51 -> 102
+  Size: 80,000,000 bytes (76.29 MB)
+  FCT: 42558.80 us (42.56 ms)
+  Throughput: 15.04 Gbps
+  Time: 400.00 -> 42958.80 us
+  DCTCP Events: 21946
+
+Flow 32: flow_52_103
+  Route: 52 -> 103
+  Size: 80,000,000 bytes (76.29 MB)
+  FCT: 52892.90 us (52.89 ms)
+  Throughput: 12.10 Gbps
+  Time: 400.00 -> 53292.90 us
+  DCTCP Events: 24891
+
+======================================================================
+Overall FCT Statistics
+======================================================================
+  Total Flows: 32
+  Mean FCT: 65741.93 us (65.74 ms)
+  Median FCT: 66892.90 us (66.89 ms)
+  Min FCT: 10339.90 us (10.34 ms)
+  Max FCT: 99986.30 us (99.99 ms)
+  Std Dev: 36825.08 us
+  Variance: 1356086592.28
+  P50: 67107.60 us (67.11 ms)
+  P95: 99984.40 us (99.98 ms)
+  P99: 99986.30 us (99.99 ms)
+
+======================================================================
+Overall Throughput Statistics
+======================================================================
+  Mean Throughput: 10.58 Gbps
+  Median Throughput: 10.02 Gbps
+  Min Throughput: 4.00 Gbps
+  Max Throughput: 18.60 Gbps
+
+======================================================================
+Analysis by Flow Size
+======================================================================
+
+SMALL Flows (n=16):
+  Mean FCT: 52567.80 us (52.57 ms)
+  Median FCT: 35876.53 us (35.88 ms)
+  Min FCT: 10339.90 us
+  Max FCT: 99986.30 us
+
+MEDIUM Flows (n=12):
+  Mean FCT: 83146.56 us (83.15 ms)
+  Median FCT: 99884.45 us (99.88 ms)
+  Min FCT: 42558.80 us
+  Max FCT: 99898.30 us
+
+LARGE Flows (n=4):
+  Mean FCT: 66224.55 us (66.22 ms)
+  Median FCT: 66637.50 us (66.64 ms)
+  Min FCT: 64515.60 us
+  Max FCT: 67107.60 us
+
+======================================================================
+Incast Pattern Analysis
+======================================================================
+
+Receiver 16: 4 senders
+  Senders: [0, 1, 2, 3]
+  Mean FCT: 89727.15 us (89.73 ms)
+  Max FCT: 99984.40 us (99.98 ms)
+  FCT Variance: 389693792.01
+
+Receiver 32: 4 senders
+  Senders: [4, 5, 6, 7]
+  Mean FCT: 98278.24 us (98.28 ms)
+  Max FCT: 99986.30 us (99.99 ms)
+  FCT Variance: 11602760.92
+
+Receiver 48: 4 senders
+  Senders: [8, 9, 10, 11]
+  Mean FCT: 99881.68 us (99.88 ms)
+  Max FCT: 99892.10 us (99.89 ms)
+  FCT Variance: 136.31
+
+Receiver 64: 4 senders
+  Senders: [12, 13, 14, 15]
+  Mean FCT: 99895.77 us (99.90 ms)
+  Max FCT: 99898.30 us (99.90 ms)
+  FCT Variance: 5.62
+
+======================================================================
+Analysis Complete
+======================================================================

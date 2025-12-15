@@ -1,0 +1,218 @@
+======================================================================
+Queue Length Variance Analysis - Task 4
+======================================================================
+Log File: /Users/zhouzhixiang/Library/CloudStorage/OneDrive-个人/high speed/spcl_HTSIM/htsim/sim/datacenter/assignment2/task4/results/logout_ecmp.dat
+ID Map: /Users/zhouzhixiang/Library/CloudStorage/OneDrive-个人/high speed/spcl_HTSIM/htsim/sim/datacenter/assignment2/task4/results/idmap.txt
+Using parse_output: /Users/zhouzhixiang/Library/CloudStorage/OneDrive-个人/high speed/spcl_HTSIM/htsim/sim/build/parse_output
+
+Extracting queue data from binary log...
+Found data for 16 core switches
+
+======================================================================
+Per-Switch Queue Statistics
+======================================================================
+
+Switch_Core_0:
+  Samples: 19999
+  Mean Queue Length: 4.95 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 1500 bytes
+  Standard Deviation: 86.03 bytes
+  Variance: 7401.24 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 2392 bytes
+  Total Range: 2392 bytes
+
+Switch_Core_1:
+  Samples: 19999
+  Mean Queue Length: 30.08 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 3064 bytes
+  Standard Deviation: 242.26 bytes
+  Variance: 58688.53 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 3956 bytes
+  Total Range: 3956 bytes
+
+Switch_Core_10:
+  Samples: 19999
+  Mean Queue Length: 19.95 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 1500 bytes
+  Standard Deviation: 171.84 bytes
+  Variance: 29529.93 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 2004 bytes
+  Total Range: 2004 bytes
+
+Switch_Core_11:
+  Samples: 19999
+  Mean Queue Length: 37.47 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 4564 bytes
+  Standard Deviation: 348.52 bytes
+  Variance: 121463.66 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 5392 bytes
+  Total Range: 5392 bytes
+
+Switch_Core_12:
+  Samples: 19999
+  Mean Queue Length: 0.00 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 64 bytes
+  Standard Deviation: 0.45 bytes
+  Variance: 0.20 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 64 bytes
+  Total Range: 64 bytes
+
+Switch_Core_13:
+  Samples: 19999
+  Mean Queue Length: 42.51 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 3064 bytes
+  Standard Deviation: 277.62 bytes
+  Variance: 77075.01 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 3892 bytes
+  Total Range: 3892 bytes
+
+Switch_Core_14:
+  Samples: 19999
+  Mean Queue Length: 0.00 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 0 bytes
+  Standard Deviation: 0.00 bytes
+  Variance: 0.00 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 0 bytes
+  Total Range: 0 bytes
+
+Switch_Core_15:
+  Samples: 19999
+  Mean Queue Length: 30.10 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 3000 bytes
+  Standard Deviation: 242.71 bytes
+  Variance: 58906.14 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 3956 bytes
+  Total Range: 3956 bytes
+
+Switch_Core_2:
+  Samples: 19999
+  Mean Queue Length: 37.53 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 1564 bytes
+  Standard Deviation: 234.38 bytes
+  Variance: 54935.26 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 2748 bytes
+  Total Range: 2748 bytes
+
+Switch_Core_3:
+  Samples: 19999
+  Mean Queue Length: 32.46 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 3000 bytes
+  Standard Deviation: 291.46 bytes
+  Variance: 84947.03 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 4416 bytes
+  Total Range: 4416 bytes
+
+Switch_Core_4:
+  Samples: 19999
+  Mean Queue Length: 113.82 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 22152 bytes
+  Standard Deviation: 784.92 bytes
+  Variance: 616100.29 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 29716 bytes
+  Total Range: 29716 bytes
+
+Switch_Core_5:
+  Samples: 19999
+  Mean Queue Length: 0.00 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 64 bytes
+  Standard Deviation: 0.45 bytes
+  Variance: 0.20 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 64 bytes
+  Total Range: 64 bytes
+
+Switch_Core_6:
+  Samples: 19999
+  Mean Queue Length: 62.82 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 3064 bytes
+  Standard Deviation: 301.17 bytes
+  Variance: 90700.70 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 3192 bytes
+  Total Range: 3192 bytes
+
+Switch_Core_7:
+  Samples: 19999
+  Mean Queue Length: 50.63 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 4628 bytes
+  Standard Deviation: 406.14 bytes
+  Variance: 164946.99 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 5456 bytes
+  Total Range: 5456 bytes
+
+Switch_Core_8:
+  Samples: 19999
+  Mean Queue Length: 72.71 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 4564 bytes
+  Standard Deviation: 369.76 bytes
+  Variance: 136721.62 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 4628 bytes
+  Total Range: 4628 bytes
+
+Switch_Core_9:
+  Samples: 19999
+  Mean Queue Length: 62.48 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 3000 bytes
+  Standard Deviation: 405.89 bytes
+  Variance: 164750.65 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 4332 bytes
+  Total Range: 4332 bytes
+
+======================================================================
+Load Balancing Analysis - Variance Among Switches
+======================================================================
+  Total Core Switches: 16
+
+  === SPATIAL VARIANCE (Load Balancing Metric) ===
+  Variance Among Switches: 949.79 bytes²
+  Std Dev Among Switches: 30.82 bytes
+    → Lower variance = Better load balancing
+
+  === QUEUE LENGTH DISTRIBUTION ===
+  Mean Queue Length: 37.34 bytes
+  Median Queue Length: 34.97 bytes
+  Min Queue Length: 0.00 bytes
+  Max Queue Length: 113.82 bytes
+  Range: 113.82 bytes
+    → Smaller range = More uniform load
+
+  === CONGESTION ===
+  Peak Queue Observed: 22152.00 bytes
+
+  === TEMPORAL INFO (Reference) ===
+  Mean Temporal Variance: 104135.47 bytes²
+    → How much queues fluctuate over time
+
+======================================================================
+Analysis Complete
+======================================================================

@@ -4,6 +4,9 @@
 
 #include <list>
 #include <optional>
+#include <array>
+#include <deque>
+#include <unordered_map>
 #include "eventlist.h"
 #include "buffer_reps.h"
 
@@ -18,7 +21,7 @@ public:
      * @param uint16_t path_id The path ID/entropy value as received by ACK/NACK
      * @param PathFeedback path_id The ACK/NACK response
      */
-    virtual void processEv(uint16_t path_id, PathFeedback feedback) = 0;
+    virtual void processEv(uint16_t path_id, PathFeedback feedback, uint8_t congestion_level = 0) = 0;
     /**
      * @param uint64_t seq_sent The sequence number to be sent
      * @param uint64_t cur_cwnd_in_pkts The current congestion window in packets.
@@ -32,7 +35,7 @@ protected:
 class UecMpOblivious : public UecMultipath {
 public:
     UecMpOblivious(uint16_t no_of_paths, bool debug);
-    void processEv(uint16_t path_id, PathFeedback feedback) override;
+    void processEv(uint16_t path_id, PathFeedback feedback, uint8_t congestion_level = 0) override;
     uint16_t nextEntropy(uint64_t seq_sent, uint64_t cur_cwnd_in_pkts) override;
 private:
     uint16_t _no_of_paths;       // must be a power of 2
@@ -45,7 +48,7 @@ private:
 class UecMpBitmap : public UecMultipath {
 public:
     UecMpBitmap(uint16_t no_of_paths, bool debug);
-    void processEv(uint16_t path_id, PathFeedback feedback) override;
+    void processEv(uint16_t path_id, PathFeedback feedback, uint8_t congestion_level = 0) override;
     uint16_t nextEntropy(uint64_t seq_sent, uint64_t cur_cwnd_in_pkts) override;
 private:
     uint16_t _no_of_paths;       // must be a power of 2
@@ -62,7 +65,7 @@ private:
 class UecMpRepsLegacy : public UecMultipath {
 public:
     UecMpRepsLegacy(uint16_t no_of_paths, bool debug);
-    void processEv(uint16_t path_id, PathFeedback feedback) override;
+    void processEv(uint16_t path_id, PathFeedback feedback, uint8_t congestion_level = 0) override;
     uint16_t nextEntropy(uint64_t seq_sent, uint64_t cur_cwnd_in_pkts) override;
     optional<uint16_t> nextEntropyRecycle();
 private:
@@ -75,7 +78,7 @@ private:
 class UecMpReps : public UecMultipath {
 public:
     UecMpReps(uint16_t no_of_paths, bool debug, bool is_trimming_enabled);
-    void processEv(uint16_t path_id, PathFeedback feedback) override;
+    void processEv(uint16_t path_id, PathFeedback feedback, uint8_t congestion_level = 0) override;
     uint16_t nextEntropy(uint64_t seq_sent, uint64_t cur_cwnd_in_pkts) override;
 private:
     uint16_t _no_of_paths;
@@ -85,10 +88,22 @@ private:
     bool _is_trimming_enabled = true;  // whether to trim the circular buffer
 };
 
+class UecMpRepsSmart : public UecMultipath {
+public:
+    UecMpRepsSmart(uint16_t no_of_paths, bool debug);
+    void processEv(uint16_t path_id, PathFeedback feedback, uint8_t congestion_level = 0) override;
+    uint16_t nextEntropy(uint64_t seq_sent, uint64_t cur_cwnd_in_pkts) override;
+private:
+    uint16_t _no_of_paths;
+    uint8_t _max_congestion_level;
+    std::array<std::deque<uint16_t>, 8> _ev_buckets;
+    std::unordered_map<uint16_t, uint8_t> _ev_level;
+};
+
 class UecMpMixed : public UecMultipath {
 public:
     UecMpMixed(uint16_t no_of_paths, bool debug);
-    void processEv(uint16_t path_id, PathFeedback feedback) override;
+    void processEv(uint16_t path_id, PathFeedback feedback, uint8_t congestion_level = 0) override;
     uint16_t nextEntropy(uint64_t seq_sent, uint64_t cur_cwnd_in_pkts) override;
     void set_debug_tag(string debug_tag) override;
 private:
@@ -99,7 +114,7 @@ private:
 class UecMpEcmp : public UecMultipath {
 public:
     UecMpEcmp(uint16_t no_of_paths, bool debug);
-    void processEv(uint16_t path_id, PathFeedback feedback) override;
+    void processEv(uint16_t path_id, PathFeedback feedback, uint8_t congestion_level = 0) override;
     uint16_t nextEntropy(uint64_t seq_sent, uint64_t cur_cwnd_in_pkts) override;
 private:
     uint16_t _crt_path;

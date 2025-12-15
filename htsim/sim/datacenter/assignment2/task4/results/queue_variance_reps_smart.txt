@@ -1,0 +1,218 @@
+======================================================================
+Queue Length Variance Analysis - Task 4
+======================================================================
+Log File: /Users/zhouzhixiang/Library/CloudStorage/OneDrive-个人/high speed/spcl_HTSIM/htsim/sim/datacenter/assignment2/task4/results/logout_reps_smart.dat
+ID Map: /Users/zhouzhixiang/Library/CloudStorage/OneDrive-个人/high speed/spcl_HTSIM/htsim/sim/datacenter/assignment2/task4/results/idmap.txt
+Using parse_output: /Users/zhouzhixiang/Library/CloudStorage/OneDrive-个人/high speed/spcl_HTSIM/htsim/sim/build/parse_output
+
+Extracting queue data from binary log...
+Found data for 16 core switches
+
+======================================================================
+Per-Switch Queue Statistics
+======================================================================
+
+Switch_Core_0:
+  Samples: 19999
+  Mean Queue Length: 31.97 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 13500 bytes
+  Standard Deviation: 274.85 bytes
+  Variance: 75544.30 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 15064 bytes
+  Total Range: 15064 bytes
+
+Switch_Core_1:
+  Samples: 19999
+  Mean Queue Length: 29.79 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 13500 bytes
+  Standard Deviation: 263.57 bytes
+  Variance: 69471.32 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 24000 bytes
+  Total Range: 24000 bytes
+
+Switch_Core_10:
+  Samples: 19999
+  Mean Queue Length: 137.44 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 181500 bytes
+  Standard Deviation: 3098.11 bytes
+  Variance: 9598282.38 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 196500 bytes
+  Total Range: 196500 bytes
+
+Switch_Core_11:
+  Samples: 19999
+  Mean Queue Length: 31.92 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 12000 bytes
+  Standard Deviation: 267.22 bytes
+  Variance: 71405.38 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 19564 bytes
+  Total Range: 19564 bytes
+
+Switch_Core_12:
+  Samples: 19999
+  Mean Queue Length: 109.64 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 10500 bytes
+  Standard Deviation: 461.46 bytes
+  Variance: 212943.75 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 13564 bytes
+  Total Range: 13564 bytes
+
+Switch_Core_13:
+  Samples: 19999
+  Mean Queue Length: 25.38 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 4500 bytes
+  Standard Deviation: 210.20 bytes
+  Variance: 44185.10 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 12064 bytes
+  Total Range: 12064 bytes
+
+Switch_Core_14:
+  Samples: 19999
+  Mean Queue Length: 33.93 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 6000 bytes
+  Standard Deviation: 264.59 bytes
+  Variance: 70005.64 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 21000 bytes
+  Total Range: 21000 bytes
+
+Switch_Core_15:
+  Samples: 19999
+  Mean Queue Length: 28.75 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 6000 bytes
+  Standard Deviation: 234.32 bytes
+  Variance: 54906.39 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 18000 bytes
+  Total Range: 18000 bytes
+
+Switch_Core_2:
+  Samples: 19999
+  Mean Queue Length: 32.51 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 16500 bytes
+  Standard Deviation: 292.76 bytes
+  Variance: 85710.56 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 21000 bytes
+  Total Range: 21000 bytes
+
+Switch_Core_3:
+  Samples: 19999
+  Mean Queue Length: 37.07 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 10500 bytes
+  Standard Deviation: 289.35 bytes
+  Variance: 83723.81 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 24064 bytes
+  Total Range: 24064 bytes
+
+Switch_Core_4:
+  Samples: 19999
+  Mean Queue Length: 30.56 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 9000 bytes
+  Standard Deviation: 255.67 bytes
+  Variance: 65366.10 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 18000 bytes
+  Total Range: 18000 bytes
+
+Switch_Core_5:
+  Samples: 19999
+  Mean Queue Length: 674.62 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 219000 bytes
+  Standard Deviation: 6835.22 bytes
+  Variance: 46720253.73 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 225000 bytes
+  Total Range: 225000 bytes
+
+Switch_Core_6:
+  Samples: 19999
+  Mean Queue Length: 167.80 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 177000 bytes
+  Standard Deviation: 3402.78 bytes
+  Variance: 11578877.78 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 180000 bytes
+  Total Range: 180000 bytes
+
+Switch_Core_7:
+  Samples: 19999
+  Mean Queue Length: 30.12 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 6000 bytes
+  Standard Deviation: 239.97 bytes
+  Variance: 57584.88 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 15000 bytes
+  Total Range: 15000 bytes
+
+Switch_Core_8:
+  Samples: 19999
+  Mean Queue Length: 28.76 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 6000 bytes
+  Standard Deviation: 238.09 bytes
+  Variance: 56687.43 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 10500 bytes
+  Total Range: 10500 bytes
+
+Switch_Core_9:
+  Samples: 19999
+  Mean Queue Length: 32.96 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 6000 bytes
+  Standard Deviation: 259.38 bytes
+  Variance: 67277.26 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 13500 bytes
+  Total Range: 13500 bytes
+
+======================================================================
+Load Balancing Analysis - Variance Among Switches
+======================================================================
+  Total Core Switches: 16
+
+  === SPATIAL VARIANCE (Load Balancing Metric) ===
+  Variance Among Switches: 26140.08 bytes²
+  Std Dev Among Switches: 161.68 bytes
+    → Lower variance = Better load balancing
+
+  === QUEUE LENGTH DISTRIBUTION ===
+  Mean Queue Length: 91.45 bytes
+  Median Queue Length: 32.24 bytes
+  Min Queue Length: 25.38 bytes
+  Max Queue Length: 674.62 bytes
+  Range: 649.24 bytes
+    → Smaller range = More uniform load
+
+  === CONGESTION ===
+  Peak Queue Observed: 219000.00 bytes
+
+  === TEMPORAL INFO (Reference) ===
+  Mean Temporal Variance: 4307014.11 bytes²
+    → How much queues fluctuate over time
+
+======================================================================
+Analysis Complete
+======================================================================

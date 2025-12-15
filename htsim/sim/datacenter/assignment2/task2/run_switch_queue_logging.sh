@@ -8,7 +8,7 @@
 EXECUTABLE="../../htsim_uec"
 TOPOLOGY="../../topologies/topo_assignment2/fat_tree_128_4os.topo"
 CONNECTION_MATRIX="../../connection_matrices/cm_assignment2/one.cm"
-LOAD_BALANCING_ALGO="ecmp"  # ecmp, reps, oblivious
+LOAD_BALANCING_ALGO="reps"  # ecmp, reps, oblivious
 
 # Output Directory
 OUTPUT_DIR="$(pwd)/results"

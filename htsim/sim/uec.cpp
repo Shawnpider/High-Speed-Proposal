@@ -1056,7 +1056,8 @@ void UecSrc::processAck(const UecAckPacket& pkt) {
     //assert(_in_flight >= 0);
 
 
-    _mp->processEv(pkt.ev(), pkt.ecn_echo() ? UecMultipath::PATH_ECN : UecMultipath::PATH_GOOD);
+    uint8_t ack_congestion = pkt.max_congestion_level();
+    _mp->processEv(pkt.ev(), pkt.ecn_echo() ? UecMultipath::PATH_ECN : UecMultipath::PATH_GOOD, ack_congestion);
 
     if(_flow.flow_id() == _debug_flowid ){
         cout <<  timeAsUs(eventlist().now()) << " flowid " << _flow.flow_id() << " track_avg_rtt " << timeAsUs(get_avg_delay())
@@ -1622,10 +1623,11 @@ void UecSrc::processNack(const UecNackPacket& pkt) {
         recalculateRTO();
     }
 
-    if (pkt.last_hop())
-        _mp->processEv(ev, pkt.ecn_echo() ? UecMultipath::PATH_ECN : UecMultipath::PATH_GOOD);
-    else
-        _mp->processEv(ev, UecMultipath::PATH_NACK);
+    if (pkt.last_hop()) {
+        _mp->processEv(ev, pkt.ecn_echo() ? UecMultipath::PATH_ECN : UecMultipath::PATH_GOOD, pkt.max_congestion_level());
+    } else {
+        _mp->processEv(ev, UecMultipath::PATH_NACK, UecBasePacket::CONG_MAX);
+    }
 
     sendIfPermitted();
 }
@@ -2352,7 +2354,7 @@ void UecSrc::rtxTimerExpired() {
 
     // Trigger multipathing feedback for timeout. Unless we save EVs on the sender per packet, we will 
     // not be able to recover the original timed-out ev.
-    _mp->processEv(UecMultipath::UNKNOWN_EV, UecMultipath::PATH_TIMEOUT);
+    _mp->processEv(UecMultipath::UNKNOWN_EV, UecMultipath::PATH_TIMEOUT, UecBasePacket::CONG_MAX);
 
     // update flightsize?
 
@@ -2597,6 +2599,7 @@ void UecSink::processData(UecDataPacket& pkt) {
     if (pkt.packet_type() == UecBasePacket::DATA_PROBE){
         UecAckPacket* ack_packet =
             sack(pkt.path_id(), sackBitmapBase(pkt.epsn()), pkt.epsn(), (bool)(pkt.flags() & ECN_CE), pkt.retransmitted());
+        ack_packet->update_congestion_level(pkt.max_congestion_level());
         ack_packet->set_probe_ack(true);
         _nic.sendControlPacket(ack_packet, NULL, this);   
         return;     
@@ -2673,6 +2676,7 @@ void UecSink::processData(UecDataPacket& pkt) {
         // the ACK state of OOO packets.
         UecAckPacket* ack_packet =
             sack(pkt.path_id(), ecn ? pkt.epsn() : sackBitmapBase(pkt.epsn()), pkt.epsn(), ecn, pkt.retransmitted());
+        ack_packet->update_congestion_level(pkt.max_congestion_level());
         _nic.sendControlPacket(ack_packet, NULL, this);
 
         _accepted_bytes = 0;  // careful about this one.
@@ -2738,6 +2742,7 @@ void UecSink::processData(UecDataPacket& pkt) {
     if (ecn || shouldSack() || force_ack) {
         UecAckPacket* ack_packet =
             sack(pkt.path_id(), (ecn || pkt.ar()) ? pkt.epsn() : sackBitmapBase(pkt.epsn()), pkt.epsn(), ecn, pkt.retransmitted());
+        ack_packet->update_congestion_level(pkt.max_congestion_level());
 
         if (_src->debug()) {
             cout << " UecSink " << _nodename << " src " << _src->nodename()
@@ -2784,6 +2789,7 @@ void UecSink::processTrimmed(const UecDataPacket& pkt) {
                  << _src->flow()->str() << endl;
 
         UecAckPacket* ack_packet = sack(pkt.path_id(), sackBitmapBase(pkt.epsn()), pkt.epsn(), false, pkt.retransmitted());
+        ack_packet->update_congestion_level(pkt.max_congestion_level());
         //ack_packet->sendOn();
         _nic.sendControlPacket(ack_packet, NULL, this);
         return;
@@ -2801,6 +2807,7 @@ void UecSink::processTrimmed(const UecDataPacket& pkt) {
              << " flow " << _src->flow()->str() << endl;
 
     UecNackPacket* nack_packet = nack(pkt.path_id(), pkt.epsn(), is_last_hop, (bool)(pkt.flags() & ECN_CE));
+    nack_packet->update_congestion_level(pkt.max_congestion_level());
 
     // nack_packet->sendOn();
     _nic.sendControlPacket(nack_packet, NULL, this);
@@ -2850,12 +2857,13 @@ void UecSink::processRts(const UecRtsPacket& pkt) {
 
         _stats.duplicates++;
 
-        // sender is confused and sending us duplicates: ACK straight away.
-        // this code is different from the proposed hardware implementation, as it keeps track of
-        // the ACK state of OOO packets.
-        UecAckPacket* ack_packet = sack(pkt.path_id(), sackBitmapBase(pkt.epsn()), pkt.epsn(), ecn, pkt.retransmitted());
-        ack_packet->set_is_rts(true);
-        _nic.sendControlPacket(ack_packet, NULL, this);
+    // sender is confused and sending us duplicates: ACK straight away.
+    // this code is different from the proposed hardware implementation, as it keeps track of
+    // the ACK state of OOO packets.
+    UecAckPacket* ack_packet = sack(pkt.path_id(), sackBitmapBase(pkt.epsn()), pkt.epsn(), ecn, pkt.retransmitted());
+    ack_packet->update_congestion_level(pkt.max_congestion_level());
+    ack_packet->set_is_rts(true);
+    _nic.sendControlPacket(ack_packet, NULL, this);
 
         _accepted_bytes = 0;  // careful about this one.
         return;
@@ -2884,6 +2892,7 @@ void UecSink::processRts(const UecRtsPacket& pkt) {
 
     UecAckPacket* ack_packet =
         sack(pkt.path_id(), (ecn || pkt.ar()) ? pkt.epsn() : sackBitmapBase(pkt.epsn()), pkt.epsn(), ecn, pkt.retransmitted());
+    ack_packet->update_congestion_level(pkt.max_congestion_level());
     ack_packet->set_is_rts(true);
     if (_src->debug())
         cout << " UecSink " << _nodename << " src " << _src->nodename()
@@ -3192,5 +3201,3 @@ void UecPullPacer::requestPull(UecSink* sink) {
         _active = true;
     }
 }
-
-

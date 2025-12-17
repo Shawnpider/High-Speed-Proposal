@@ -1,9 +1,9 @@
 ======================================================================
 Queue Length Variance Analysis - Task 4
 ======================================================================
-Log File: /Users/zhouzhixiang/Library/CloudStorage/OneDrive-个人/high speed/spcl_HTSIM/htsim/sim/datacenter/assignment2/task4/results/logout_reps.dat
-ID Map: /Users/zhouzhixiang/Library/CloudStorage/OneDrive-个人/high speed/spcl_HTSIM/htsim/sim/datacenter/assignment2/task4/results/idmap.txt
-Using parse_output: /Users/zhouzhixiang/Library/CloudStorage/OneDrive-个人/high speed/spcl_HTSIM/htsim/sim/build/parse_output
+Log File: /Users/ziqiaozhu/Desktop/nyu/HighSpeedNetwork/High-Speed-Proposal/htsim/sim/datacenter/assignment2/task4/results/logout_reps.dat
+ID Map: /Users/ziqiaozhu/Desktop/nyu/HighSpeedNetwork/High-Speed-Proposal/htsim/sim/datacenter/assignment2/task4/results/idmap.txt
+Using parse_output: /Users/ziqiaozhu/Desktop/nyu/HighSpeedNetwork/High-Speed-Proposal/htsim/sim/build/parse_output
 
 Extracting queue data from binary log...
 Found data for 16 core switches

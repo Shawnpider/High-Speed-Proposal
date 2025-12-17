@@ -205,6 +205,8 @@ UecMpRepsSmart::UecMpRepsSmart(uint16_t no_of_paths, bool debug)
       _no_of_paths(no_of_paths),
       _max_congestion_level(7) {
 
+    //change from smartt to conga
+
     if (_debug) {
         cout << "Multipath"
             << " REPS_SMART"
@@ -259,7 +261,6 @@ uint16_t UecMpRepsSmart::nextEntropy(uint64_t /*seq_sent*/, uint64_t /*cur_cwnd_
 
     return rand() % _no_of_paths;
 }
-
 
 UecMpRepsLegacy::UecMpRepsLegacy(uint16_t no_of_paths, bool debug)
     : UecMultipath(debug),

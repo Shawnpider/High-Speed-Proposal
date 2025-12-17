@@ -17,3 +17,13 @@ echo "Summary:"
 paste <(printf "algo\nreps\nreps_smart\n") \
       <(printf "FCT_out\nfct_reps.txt\nfct_reps_smart.txt\n") \
       <(printf "Qvar_out\nqueue_variance_reps.txt\nqueue_variance_reps_smart.txt\n")
+
+echo "Reordering ratio comparison"
+
+grep "ReorderingRatio" "$OUTDIR/congestion_reps.out" \
+    | awk '{print $2}' \
+    | tee "$OUTDIR/reordering_ratio_reps.txt"
+
+grep "ReorderingRatio" "$OUTDIR/congestion_reps_smart.out" \
+    | awk '{print $2}' \
+    | tee "$OUTDIR/reordering_ratio_reps_smart.txt"

@@ -1,6 +1,7 @@
 // -*- c-basic-offset: 4; indent-tabs-mode: nil -*-        
 #include <sstream>
 #include <math.h>
+#include <fstream> 
 #include "queue.h"
 #include "ndppacket.h"
 #include "queue_lossless.h"
@@ -112,15 +113,23 @@ BaseQueue::quantized_queuesize(){
         _last_update_qs = eventlist().now();
 
         uint64_t qs = queuesize();
-        if (qs < maxsize() * 0.05)
-            _last_qs = 0;
-        else if (qs < maxsize() * 0.1)
-            _last_qs = 1;
-        else if (qs < maxsize() * 0.2)
-            _last_qs = 2;
-        else 
-            _last_qs = 3;
+        double r = (double)qs / (double)maxsize();
+
+        if      (r < 0.005) _last_qs = 0;
+        else if (r < 0.01)  _last_qs = 1;
+        else if (r < 0.02)  _last_qs = 2;
+        else if (r < 0.04)  _last_qs = 3;
+        else if (r < 0.07)  _last_qs = 4;
+        else if (r < 0.10)  _last_qs = 5;
+        else if (r < 0.15)  _last_qs = 6;
+        else                _last_qs = 7;
         //_last_qs = queuesize();
+        cout << "[QS]"
+        << " t=" << timeAsUs(eventlist().now())
+        << " qs=" << qs
+        << " r=" << r
+        << " level=" << (int)_last_qs
+        << endl;
 
         //cout << "QS " << (uint32_t)_last_qs << " queuesize " << queuesize() << " max " << maxsize() << endl;
     }

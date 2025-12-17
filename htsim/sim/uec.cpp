@@ -2915,8 +2915,26 @@ void UecSink::receivePacket(Packet& pkt, uint32_t port_num) {
                 processTrimmed((const UecDataPacket&)pkt);
                 // cout << "UecSink::receivePacket receive trimmed packet\n";
                 // assert(false);
-            }else
-                processData((UecDataPacket&)pkt);
+            } else {
+                auto& data = (UecDataPacket&)pkt;
+
+                // === Reordering statistics ===
+                _total_pkts++;
+                if (data.epsn() < _max_seq_seen) {
+                    _reordered_pkts++;
+                }
+                _max_seq_seen = std::max(_max_seq_seen, data.epsn());
+
+                // === Print ONCE (after enough packets observed) ===
+                if (!_printed_reordering && _total_pkts > 10000) {
+                    cout << "ReorderingRatio "
+                            << (double)_reordered_pkts / _total_pkts
+                            << endl;
+                    _printed_reordering = true;
+                }
+
+                processData(data);
+            }
 
             pkt.free();
             break;

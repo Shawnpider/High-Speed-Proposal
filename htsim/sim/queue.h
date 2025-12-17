@@ -58,7 +58,6 @@ class BaseQueue  : public EventSource, public PacketSink, public Drawable {
     inline mem_b serviceCapacity(simtime_picosec t) { 
             return (mem_b)(timeAsSec(t) * (double)_bitrate); 
     }
-
     virtual void log_packet_send(simtime_picosec duration);
     virtual uint16_t average_utilization();
 

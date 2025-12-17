@@ -98,6 +98,9 @@ private:
     uint8_t _max_congestion_level;
     std::array<std::deque<uint16_t>, 8> _ev_buckets;
     std::unordered_map<uint16_t, uint8_t> _ev_level;
+    // NEW: EWMA state per EV
+    std::unordered_map<uint16_t, float> _ev_level_ewma;
+    float _alpha = 0.8f;
 };
 
 class UecMpMixed : public UecMultipath {

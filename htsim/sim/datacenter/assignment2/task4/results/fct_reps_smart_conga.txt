@@ -25,7 +25,7 @@ Flow 2: flow_1_16
   FCT: 60127.76 us (60.13 ms)
   Throughput: 6.65 Gbps
   Time: 13.74 -> 60141.50 us
-  DCTCP Events: 17659
+  DCTCP Events: 17658
 
 Flow 3: flow_2_16
   Route: 2 -> 16

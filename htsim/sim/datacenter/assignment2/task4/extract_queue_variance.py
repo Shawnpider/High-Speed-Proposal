@@ -28,7 +28,8 @@ def find_parse_output():
 
 def extract_queue_data(log_file, idmap_file, parse_output):
     """Extract queue usage data for core switches"""
-    
+
+
     if not os.path.exists(log_file):
         print(f"Error: Log file not found: {log_file}")
         return {}
@@ -53,6 +54,10 @@ def extract_queue_data(log_file, idmap_file, parse_output):
     except Exception as e:
         print(f"Error running parse_output: {e}")
         return {}
+    
+    #CDF raw data
+    raw_out = open("queue_raw_samples.csv", "w")
+    raw_out.write("switch,time,queue_bytes\n")
     
     # Parse output to extract core switch queue data
     queue_data = defaultdict(list)
@@ -81,7 +86,7 @@ def extract_queue_data(log_file, idmap_file, parse_output):
                     elif part.startswith('Switch_Core_'):
                         name_idx = i
                 
-                if lastq_idx and name_idx:
+                if lastq_idx is not None and name_idx is not None:
                     timestamp = float(parts[time_idx])
                     last_q = int(parts[lastq_idx])
                     min_q = int(parts[minq_idx]) if minq_idx else last_q
@@ -94,10 +99,15 @@ def extract_queue_data(log_file, idmap_file, parse_output):
                         'min_q': min_q,
                         'max_q': max_q
                     })
+
+                    # NEW: dump raw queue sample for CDF
+                    raw_out.write(f"{switch_name},{timestamp},{last_q}\n")
             
             except (ValueError, IndexError) as e:
                 continue
+
     
+    raw_out.close()
     return queue_data
 
 def calculate_queue_statistics(queue_data):

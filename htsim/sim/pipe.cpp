@@ -2,6 +2,19 @@
 #include "pipe.h"
 #include <iostream>
 #include <sstream>
+#include <fstream>
+#include "switch.h"
+
+std::map<std::string, uint64_t> core_link_bytes;
+
+void dump_core_link_bytes() {
+    std::ofstream out("core_link_bytes.csv");
+    out << "link_name,total_bytes\n";
+    for (auto &kv : core_link_bytes) {
+        out << kv.first << "," << kv.second << "\n";
+    }
+    out.close();
+}
 
 Pipe::Pipe(simtime_picosec delay, EventList& eventlist)
 : EventSource(eventlist,"pipe"), _delay(delay)
@@ -51,6 +64,27 @@ Pipe::receivePacket(Packet& pkt)
 
 void
 Pipe::doNextEvent() {
+
+    /*cout << "[DEBUG][EVENT] pipe "
+     << _nodename
+     << " this=" << this
+     << " switch=" << _switch
+     << endl;*/
+
+    /*if (_switch == nullptr) {
+        static int cnt = 0;
+        if (cnt < 10) {
+            std::cout << "[DEBUG] pipe " << _nodename
+                      << " has NULL switch" << std::endl;
+            cnt++;
+        }
+    } else {
+        cout << "[DEBUG][HIT] pipe "
+        << _nodename
+        << " switch=" << _switch->nodename()
+        << endl;
+    }*/
+
     //if (_inflight.size() == 0) 
     if (_count == 0) 
             return;
@@ -61,6 +95,21 @@ Pipe::doNextEvent() {
     _next_pop = (_next_pop +1) % _size;
     _count--;
     pkt->flow().logTraffic(*pkt, *this,TrafficLogger::PKT_DEPART);
+
+    // ===== Core link utilization accounting (FINAL, CORRECT) =====
+    if (_switch && _switch->nodename().find("Switch_Core_") != std::string::npos) {
+        core_link_bytes[_switch->nodename()] += pkt->size();
+    }
+
+    static int hit = 0;
+    if (_nodename.find("CS") != std::string::npos && hit < 10) {
+        std::cout << "[DEBUG] packet passes core pipe "
+                << _nodename
+                << " size=" << pkt->size()
+                << std::endl;
+        hit++;
+    }
+
 
     // tell the packet to move itself on to the next hop
     pkt->sendOn();

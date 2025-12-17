@@ -18,6 +18,7 @@
 #include "uec.h"
 #include "uec_mp.h"
 #include "uec_pdcses.h"
+#include "queue.h"
 #include "compositequeue.h"
 #include "topology.h"
 #include "connection_matrix.h"
@@ -1133,6 +1134,9 @@ int main(int argc, char **argv) {
         sleek_pkts += s._sleek_counter;
     }
     cout << "New: " << new_pkts << " Rtx: " << rtx_pkts << " RTS: " << rts_pkts << " Bounced: " << bounce_pkts << " ACKs: " << ack_pkts << " NACKs: " << nack_pkts << " Pulls: " << pull_pkts << " sleek_pkts: " << sleek_pkts << endl;
+
+
+    dump_core_link_bytes(); 
     /*
     list <const Route*>::iterator rt_i;
     int counts[10]; int hop;

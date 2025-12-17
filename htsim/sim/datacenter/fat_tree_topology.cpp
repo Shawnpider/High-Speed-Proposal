@@ -1001,6 +1001,12 @@ FatTreeTopology::FatTreeTopology(const FatTreeTopologyCfg* cfg,
                     simtime_picosec hop_latency = (_cfg->_hop_latency == 0) ? _cfg->_link_latencies[CORE_TIER] : _cfg->_hop_latency;
                     pipes_nup_nc[agg][core][b] = new Pipe(hop_latency, *_eventlist);
                     pipes_nup_nc[agg][core][b]->setName("Pipe-US" + ntoa(agg) + "->CS" + ntoa(core) + "(" + ntoa(b) + ")");
+                    pipes_nup_nc[agg][core][b]->setSwitch(switches_c[core]);
+                    /*cout << "[DEBUG][SET] pipe "
+                        << pipes_nup_nc[agg][core][b]->nodename()
+                        << " set switch = "
+                        << switches_c[core]->nodename()
+                        << endl;*/
                     //if (logfile) logfile->writeName(*(pipes_nup_nc[agg][core]));
         
                     // Uplink
@@ -1037,6 +1043,14 @@ FatTreeTopology::FatTreeTopology(const FatTreeTopologyCfg* cfg,
             
                     pipes_nc_nup[core][agg][b] = new Pipe(hop_latency, *_eventlist);
                     pipes_nc_nup[core][agg][b]->setName("Pipe-CS" + ntoa(core) + "->US" + ntoa(agg) + "(" + ntoa(b) + ")");
+                    pipes_nc_nup[core][agg][b]->setSwitch(switches_c[core]);  
+                    /*cout << "[DEBUG][SET] pipe "
+                        << pipes_nc_nup[core][agg][b]->nodename()
+                        << " this=" << pipes_nup_nc[agg][core][b]
+                        << " set switch = "
+                        << switches_c[core]->nodename()
+                        << endl;*/
+
                     //if (logfile) logfile->writeName(*(pipes_nc_nup[core][agg]));
             
                     if (_ff){

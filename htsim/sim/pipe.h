@@ -14,10 +14,20 @@
 #include "loggertypes.h"
 #include "drawable.h"
 
+/* =======================
+ * Core link utilization
+ * ======================= */
+extern std::map<std::string, uint64_t> core_link_bytes;
+
+// dump function declaration
+void dump_core_link_bytes();
+
 typedef struct pktrecord {
     simtime_picosec time;
     Packet* pkt;
 } pktrecord_t;
+
+class Switch;
 
 class Pipe : public EventSource, public PacketSink, public Drawable {
  public:
@@ -34,6 +44,8 @@ class Pipe : public EventSource, public PacketSink, public Drawable {
     PacketSink* next() const {
             return _next_sink;
     }
+    void setSwitch(Switch* sw) { _switch = sw; }
+    Switch* getSwitch() const { return _switch; }
 protected:
     string _nodename;
     //typedef pair<simtime_picosec,Packet*> pktrecord_t;
@@ -43,6 +55,7 @@ protected:
 private:
     simtime_picosec _delay;
     PacketSink* _next_sink{nullptr}; // used in generic topology for linkage
+    Switch* _switch = nullptr;
 };
 
 

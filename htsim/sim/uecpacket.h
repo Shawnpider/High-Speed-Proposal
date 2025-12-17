@@ -20,6 +20,7 @@ class UecBasePacket : public Packet {
 public:
     enum PacketType {DATA_PULL = 0, DATA_SPEC = 1, DATA_RTX = 2, DATA_PROBE = 3};    
     enum CongestionField { CONG_UNKNOWN = 0, CONG_MIN = 0, CONG_MAX = 7 };
+    //change from smartt to conga
     typedef uint64_t seq_t;
     typedef uint64_t pull_quanta;  // actual pull fields are typically
                                    // uint16_t, but we'll use 64 bits

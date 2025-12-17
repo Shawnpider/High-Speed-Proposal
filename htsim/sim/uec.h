@@ -672,6 +672,12 @@ class UecSink : public DataReceiver {
     Stats _stats;
     string _nodename;
 
+    //reordering
+    uint64_t _total_pkts = 0;
+    uint64_t _reordered_pkts = 0;
+    UecBasePacket::seq_t _max_seq_seen = 0;
+    bool _printed_reordering = false;
+
 public:
     static bool _oversubscribed_cc;
     static bool _model_pcie;

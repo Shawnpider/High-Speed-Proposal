@@ -222,6 +222,7 @@ void CompositeQueue::receivePacket(Packet& pkt)
                     } else {
                         _enqueued_high.push(booted_pkt);
                         _queuesize_high += booted_pkt->size();
+                        update_congestion_field(*booted_pkt);
                         if (_logger)
                             _logger->logQueue(*this, QueueLogger::PKT_ENQUEUE, *booted_pkt);
                     }
@@ -232,6 +233,7 @@ void CompositeQueue::receivePacket(Packet& pkt)
             Packet* pkt_p = &pkt;
             _enqueued_low.push(pkt_p);
             _queuesize_low += pkt.size();
+            update_congestion_field(pkt);
             if (_logger) _logger->logQueue(*this, QueueLogger::PKT_ENQUEUE, pkt);
             
             if (_serv==QUEUE_INVALID) {
@@ -304,6 +306,7 @@ void CompositeQueue::receivePacket(Packet& pkt)
     Packet* pkt_p = &pkt;
     _enqueued_high.push(pkt_p);
     _queuesize_high += pkt.size();
+    update_congestion_field(pkt);
     if (_logger) _logger->logQueue(*this, QueueLogger::PKT_ENQUEUE, pkt);
     
     //cout << "BH[ " << _enqueued_low.size() << " " << _enqueued_high.size() << " ]" << endl;

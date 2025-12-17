@@ -67,6 +67,7 @@ ECNQueue::receivePacket(Packet & pkt)
     Packet* pkt_p = &pkt;
     _enqueued.push(pkt_p);
     _queuesize += pkt.size();
+    update_congestion_field(pkt);
     if (_logger) _logger->logQueue(*this, QueueLogger::PKT_ENQUEUE, pkt);
 
     if (queueWasEmpty && _state_send==LosslessQueue::READY) {

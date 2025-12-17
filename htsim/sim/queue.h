@@ -63,6 +63,7 @@ class BaseQueue  : public EventSource, public PacketSink, public Drawable {
 
     virtual uint64_t quantized_queuesize();
     virtual uint8_t quantized_utilization();
+    void update_congestion_field(Packet& pkt);
 
     static simtime_picosec _update_period;
 

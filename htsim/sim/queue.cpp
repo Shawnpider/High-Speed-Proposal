@@ -22,16 +22,24 @@ BaseQueue::BaseQueue(linkspeed_bps bitrate, EventList& eventlist, QueueLogger* l
     _last_utilization = 0;
 }
 
-static inline void update_congestion_field(BaseQueue* queue, Packet& pkt) {
+void BaseQueue::update_congestion_field(Packet& pkt) {
     auto uec_pkt = dynamic_cast<UecBasePacket*>(&pkt);
     if (!uec_pkt) {
         return;
     }
-    uint64_t level = queue->quantized_queuesize();
+    uint64_t level = quantized_queuesize();
     if (level > UecBasePacket::CONG_MAX) {
         level = UecBasePacket::CONG_MAX;
     }
     uec_pkt->update_congestion_level(static_cast<uint8_t>(level));
+    
+    // Log congestion level for analysis - log all non-zero levels and sample others
+    static uint64_t log_counter = 0;
+    if (level > 0 || (++log_counter % 1000 == 0)) {  // Always log non-zero, sample every 1000 for zero
+        cout << "CONG_LEVEL," << eventlist().now() << "," << str() 
+             << "," << queuesize() << "," << maxsize() 
+             << "," << (int)level << endl;
+    }
 }
 
 void 
@@ -204,14 +212,16 @@ Queue::receivePacket(Packet& pkt)
     }
     pkt.flow().logTraffic(pkt, *this, TrafficLogger::PKT_ARRIVE);
 
-    update_congestion_field(this, pkt);
-
     /* enqueue the packet */
     bool queueWasEmpty = _enqueued.empty();
     //_enqueued.push_front(&pkt);
     Packet* pkt_p = &pkt;
     _enqueued.push(pkt_p);
     _queuesize += pkt.size();
+
+    // Quantize congestion after the enqueue so the level reflects the new queue size
+    update_congestion_field(pkt);
+
     if (_logger) _logger->logQueue(*this, QueueLogger::PKT_ENQUEUE, pkt);
 
     if (queueWasEmpty) {
@@ -318,7 +328,6 @@ PriorityQueue::receivePacket(Packet& pkt)
 
     queue_priority_t prio = getPriority(pkt);
     pkt.flow().logTraffic(pkt, *this, TrafficLogger::PKT_ARRIVE);
-    update_congestion_field(this, pkt);
 
     /* enqueue the packet */
     bool queueWasEmpty = false;
@@ -327,6 +336,9 @@ PriorityQueue::receivePacket(Packet& pkt)
 
     _queuesize[prio] += pkt.size();
     _queue[prio].push_front(&pkt);
+
+    // Quantize congestion after the enqueue so the level reflects the new queue size
+    update_congestion_field(pkt);
 
     if (_logger) _logger->logQueue(*this, QueueLogger::PKT_ENQUEUE, pkt);
 
@@ -496,7 +508,6 @@ FairPriorityQueue::receivePacket(Packet& pkt)
 
     queue_priority_t prio = getPriority(pkt);
     pkt.flow().logTraffic(pkt, *this, TrafficLogger::PKT_ARRIVE);
-    update_congestion_field(this, pkt);
 
     /* enqueue the packet */
     bool queueWasEmpty = false;
@@ -511,6 +522,9 @@ FairPriorityQueue::receivePacket(Packet& pkt)
 
     _queuesize[prio] += pkt.size();
     _queue[prio].enqueue(pkt);
+
+    // Quantize congestion after the enqueue so the level reflects the new queue size
+    update_congestion_field(pkt);
 
     if (_logger) _logger->logQueue(*this, QueueLogger::PKT_ENQUEUE, pkt);
 

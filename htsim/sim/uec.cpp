@@ -5,6 +5,7 @@
 #include "circular_buffer.h"
 #include "uec_logger.h"
 #include "pciemodel.h"
+#include "uec_mp.h"
 
 using namespace std;
 
@@ -927,6 +928,42 @@ void UecSrc::processAck(const UecAckPacket& pkt) {
     
     auto cum_ack = pkt.cumulative_ack();
     bool rtx_echo = pkt.rtx_echo();
+
+    //conga level calculation 2
+    {
+        uint16_t ev = pkt.ev();          // EV = path
+        bool ce = pkt.ecn_echo();             // ECN echo (0/1)
+
+        double& ema = _ev_ecn_ema[ev];
+        const double alpha = 0.9;
+        double x = ce ? 1.0 : 0.0;
+        ema = alpha * ema + (1.0 - alpha) * x;
+
+        uint8_t level;
+        if      (ema < 0.01) level = 0;
+        else if (ema < 0.03) level = 1;
+        else if (ema < 0.06) level = 2;
+        else if (ema < 0.10) level = 3;
+        else if (ema < 0.20) level = 4;
+        else if (ema < 0.35) level = 5;
+        else if (ema < 0.60) level = 6;
+        else                 level = 7;
+
+        _ev_level[ev] = level;
+
+        UecMultipath::PathFeedback fb =
+            (level > 0) ? UecMultipath::PATH_ECN
+            : UecMultipath::PATH_GOOD;
+
+        _mp->processEv(ev, fb, level);
+
+        cout << "[SRC-ACK-EV]"
+                << " ev=" << ev
+                << " ce=" << ce
+                << " ema=" << ema
+                << " level=" << (int)level
+                << endl;
+    }
     //handle flight_size based on recvd_bytes in packet.
     uint64_t newly_recvd_bytes = 0;
 
@@ -2106,6 +2143,14 @@ mem_b UecSrc::sendNewPacket(const Route& route) {
 
     auto* p = UecDataPacket::newpkt(_flow, route, _highest_sent, full_pkt_size, ptype,
                                      _pull_target, _dstaddr);
+
+    /*for (const auto& kv : _ev_level) {
+    uint16_t ev_id = kv.first;
+    uint8_t  level = kv.second;
+    UecMultipath::PathFeedback fb = (level > 0) ? UecMultipath::PATH_ECN : UecMultipath::PATH_GOOD;
+
+    _mp->processEv(ev_id, fb, level);
+    }*/
 
     uint16_t ev = _mp->nextEntropy(_highest_sent, (uint64_t)_cwnd/_mss);
     p->set_pathid(ev);

@@ -14,179 +14,179 @@ Per-Switch Queue Statistics
 
 Switch_Core_0:
   Samples: 19999
-  Mean Queue Length: 72.05 bytes
+  Mean Queue Length: 64.54 bytes
   Median Queue Length: 0.00 bytes
-  Queue Range: 0 - 37500 bytes
-  Standard Deviation: 861.80 bytes
-  Variance: 742707.03 bytes²
+  Queue Range: 0 - 40500 bytes
+  Standard Deviation: 805.26 bytes
+  Variance: 648446.11 bytes²
   Overall Min: 0 bytes
   Overall Max: 43500 bytes
   Total Range: 43500 bytes
 
 Switch_Core_1:
   Samples: 19999
-  Mean Queue Length: 47.68 bytes
+  Mean Queue Length: 56.67 bytes
   Median Queue Length: 0.00 bytes
-  Queue Range: 0 - 13500 bytes
-  Standard Deviation: 484.18 bytes
-  Variance: 234432.99 bytes²
-  Overall Min: 0 bytes
-  Overall Max: 27000 bytes
-  Total Range: 27000 bytes
-
-Switch_Core_10:
-  Samples: 19999
-  Mean Queue Length: 41.51 bytes
-  Median Queue Length: 0.00 bytes
-  Queue Range: 0 - 16500 bytes
-  Standard Deviation: 427.88 bytes
-  Variance: 183082.74 bytes²
-  Overall Min: 0 bytes
-  Overall Max: 24000 bytes
-  Total Range: 24000 bytes
-
-Switch_Core_11:
-  Samples: 19999
-  Mean Queue Length: 44.15 bytes
-  Median Queue Length: 0.00 bytes
-  Queue Range: 0 - 25500 bytes
-  Standard Deviation: 466.36 bytes
-  Variance: 217494.81 bytes²
-  Overall Min: 0 bytes
-  Overall Max: 28564 bytes
-  Total Range: 28564 bytes
-
-Switch_Core_12:
-  Samples: 19999
-  Mean Queue Length: 61.45 bytes
-  Median Queue Length: 0.00 bytes
-  Queue Range: 0 - 28500 bytes
-  Standard Deviation: 688.37 bytes
-  Variance: 473850.76 bytes²
+  Queue Range: 0 - 31500 bytes
+  Standard Deviation: 650.74 bytes
+  Variance: 423462.02 bytes²
   Overall Min: 0 bytes
   Overall Max: 37500 bytes
   Total Range: 37500 bytes
 
+Switch_Core_10:
+  Samples: 19999
+  Mean Queue Length: 71.75 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 30000 bytes
+  Standard Deviation: 814.22 bytes
+  Variance: 662948.04 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 45064 bytes
+  Total Range: 45064 bytes
+
+Switch_Core_11:
+  Samples: 19999
+  Mean Queue Length: 62.45 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 37500 bytes
+  Standard Deviation: 748.54 bytes
+  Variance: 560306.75 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 49500 bytes
+  Total Range: 49500 bytes
+
+Switch_Core_12:
+  Samples: 19999
+  Mean Queue Length: 52.75 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 27000 bytes
+  Standard Deviation: 584.79 bytes
+  Variance: 341984.70 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 36064 bytes
+  Total Range: 36064 bytes
+
 Switch_Core_13:
   Samples: 19999
-  Mean Queue Length: 87.20 bytes
+  Mean Queue Length: 49.54 bytes
   Median Queue Length: 0.00 bytes
-  Queue Range: 0 - 36000 bytes
-  Standard Deviation: 1064.89 bytes
-  Variance: 1133983.36 bytes²
+  Queue Range: 0 - 34500 bytes
+  Standard Deviation: 578.96 bytes
+  Variance: 335192.91 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 39064 bytes
+  Total Range: 39064 bytes
+
+Switch_Core_14:
+  Samples: 19999
+  Mean Queue Length: 53.14 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 33000 bytes
+  Standard Deviation: 613.06 bytes
+  Variance: 375844.28 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 43628 bytes
+  Total Range: 43628 bytes
+
+Switch_Core_15:
+  Samples: 19999
+  Mean Queue Length: 41.35 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 24000 bytes
+  Standard Deviation: 453.86 bytes
+  Variance: 205989.98 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 54064 bytes
+  Total Range: 54064 bytes
+
+Switch_Core_2:
+  Samples: 19999
+  Mean Queue Length: 56.15 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 27000 bytes
+  Standard Deviation: 625.81 bytes
+  Variance: 391641.04 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 43500 bytes
+  Total Range: 43500 bytes
+
+Switch_Core_3:
+  Samples: 19999
+  Mean Queue Length: 72.55 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 37500 bytes
+  Standard Deviation: 823.57 bytes
+  Variance: 678267.71 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 64564 bytes
+  Total Range: 64564 bytes
+
+Switch_Core_4:
+  Samples: 19999
+  Mean Queue Length: 56.13 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 34500 bytes
+  Standard Deviation: 616.86 bytes
+  Variance: 380519.95 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 43564 bytes
+  Total Range: 43564 bytes
+
+Switch_Core_5:
+  Samples: 19999
+  Mean Queue Length: 70.30 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 39000 bytes
+  Standard Deviation: 856.07 bytes
+  Variance: 732848.65 bytes²
+  Overall Min: 0 bytes
+  Overall Max: 40500 bytes
+  Total Range: 40500 bytes
+
+Switch_Core_6:
+  Samples: 19999
+  Mean Queue Length: 64.68 bytes
+  Median Queue Length: 0.00 bytes
+  Queue Range: 0 - 33000 bytes
+  Standard Deviation: 797.63 bytes
+  Variance: 636218.11 bytes²
   Overall Min: 0 bytes
   Overall Max: 48000 bytes
   Total Range: 48000 bytes
 
-Switch_Core_14:
-  Samples: 19999
-  Mean Queue Length: 43.97 bytes
-  Median Queue Length: 0.00 bytes
-  Queue Range: 0 - 24000 bytes
-  Standard Deviation: 445.45 bytes
-  Variance: 198424.08 bytes²
-  Overall Min: 0 bytes
-  Overall Max: 30064 bytes
-  Total Range: 30064 bytes
-
-Switch_Core_15:
-  Samples: 19999
-  Mean Queue Length: 50.68 bytes
-  Median Queue Length: 0.00 bytes
-  Queue Range: 0 - 30000 bytes
-  Standard Deviation: 579.20 bytes
-  Variance: 335474.72 bytes²
-  Overall Min: 0 bytes
-  Overall Max: 34628 bytes
-  Total Range: 34628 bytes
-
-Switch_Core_2:
-  Samples: 19999
-  Mean Queue Length: 91.97 bytes
-  Median Queue Length: 0.00 bytes
-  Queue Range: 0 - 30000 bytes
-  Standard Deviation: 1065.49 bytes
-  Variance: 1135265.00 bytes²
-  Overall Min: 0 bytes
-  Overall Max: 48064 bytes
-  Total Range: 48064 bytes
-
-Switch_Core_3:
-  Samples: 19999
-  Mean Queue Length: 57.32 bytes
-  Median Queue Length: 0.00 bytes
-  Queue Range: 0 - 19500 bytes
-  Standard Deviation: 604.72 bytes
-  Variance: 365690.34 bytes²
-  Overall Min: 0 bytes
-  Overall Max: 33064 bytes
-  Total Range: 33064 bytes
-
-Switch_Core_4:
-  Samples: 19999
-  Mean Queue Length: 42.03 bytes
-  Median Queue Length: 0.00 bytes
-  Queue Range: 0 - 16564 bytes
-  Standard Deviation: 431.21 bytes
-  Variance: 185938.19 bytes²
-  Overall Min: 0 bytes
-  Overall Max: 21064 bytes
-  Total Range: 21064 bytes
-
-Switch_Core_5:
-  Samples: 19999
-  Mean Queue Length: 43.70 bytes
-  Median Queue Length: 0.00 bytes
-  Queue Range: 0 - 13500 bytes
-  Standard Deviation: 431.00 bytes
-  Variance: 185757.91 bytes²
-  Overall Min: 0 bytes
-  Overall Max: 21000 bytes
-  Total Range: 21000 bytes
-
-Switch_Core_6:
-  Samples: 19999
-  Mean Queue Length: 95.28 bytes
-  Median Queue Length: 0.00 bytes
-  Queue Range: 0 - 48000 bytes
-  Standard Deviation: 1174.32 bytes
-  Variance: 1379016.85 bytes²
-  Overall Min: 0 bytes
-  Overall Max: 54000 bytes
-  Total Range: 54000 bytes
-
 Switch_Core_7:
   Samples: 19999
-  Mean Queue Length: 50.49 bytes
+  Mean Queue Length: 53.74 bytes
   Median Queue Length: 0.00 bytes
   Queue Range: 0 - 24000 bytes
-  Standard Deviation: 522.19 bytes
-  Variance: 272685.32 bytes²
+  Standard Deviation: 569.77 bytes
+  Variance: 324642.70 bytes²
   Overall Min: 0 bytes
-  Overall Max: 39000 bytes
-  Total Range: 39000 bytes
+  Overall Max: 39064 bytes
+  Total Range: 39064 bytes
 
 Switch_Core_8:
   Samples: 19999
-  Mean Queue Length: 40.61 bytes
+  Mean Queue Length: 54.05 bytes
   Median Queue Length: 0.00 bytes
-  Queue Range: 0 - 13564 bytes
-  Standard Deviation: 385.50 bytes
-  Variance: 148608.80 bytes²
+  Queue Range: 0 - 21000 bytes
+  Standard Deviation: 585.21 bytes
+  Variance: 342473.26 bytes²
   Overall Min: 0 bytes
-  Overall Max: 16500 bytes
-  Total Range: 16500 bytes
+  Overall Max: 40564 bytes
+  Total Range: 40564 bytes
 
 Switch_Core_9:
   Samples: 19999
-  Mean Queue Length: 58.87 bytes
+  Mean Queue Length: 56.88 bytes
   Median Queue Length: 0.00 bytes
-  Queue Range: 0 - 31500 bytes
-  Standard Deviation: 666.75 bytes
-  Variance: 444550.01 bytes²
+  Queue Range: 0 - 27000 bytes
+  Standard Deviation: 647.69 bytes
+  Variance: 419508.24 bytes²
   Overall Min: 0 bytes
-  Overall Max: 36064 bytes
-  Total Range: 36064 bytes
+  Overall Max: 45128 bytes
+  Total Range: 45128 bytes
 
 ======================================================================
 Load Balancing Analysis - Variance Among Switches
@@ -194,23 +194,23 @@ Load Balancing Analysis - Variance Among Switches
   Total Core Switches: 16
 
   === SPATIAL VARIANCE (Load Balancing Metric) ===
-  Variance Among Switches: 349.73 bytes²
-  Std Dev Among Switches: 18.70 bytes
+  Variance Among Switches: 73.21 bytes²
+  Std Dev Among Switches: 8.56 bytes
     → Lower variance = Better load balancing
 
   === QUEUE LENGTH DISTRIBUTION ===
-  Mean Queue Length: 58.06 bytes
-  Median Queue Length: 50.59 bytes
-  Min Queue Length: 40.61 bytes
-  Max Queue Length: 95.28 bytes
-  Range: 54.67 bytes
+  Mean Queue Length: 58.54 bytes
+  Median Queue Length: 56.41 bytes
+  Min Queue Length: 41.35 bytes
+  Max Queue Length: 72.55 bytes
+  Range: 31.20 bytes
     → Smaller range = More uniform load
 
   === CONGESTION ===
-  Peak Queue Observed: 48000.00 bytes
+  Peak Queue Observed: 40500.00 bytes
 
   === TEMPORAL INFO (Reference) ===
-  Mean Temporal Variance: 477310.18 bytes²
+  Mean Temporal Variance: 466268.40 bytes²
     → How much queues fluctuate over time
 
 ======================================================================

@@ -29,6 +29,7 @@ class UecPullPacer;
 class UecSink;
 class UecSrc;
 class UecLogger;
+class UecMultipath;
 
 
 // UecNIC aggregates UecSrcs that are on the same NIC.  It round
@@ -156,6 +157,8 @@ public:
     void doNextEvent();
     uint32_t dst() { return _dstaddr; }
     void setDst(uint32_t dst) { _dstaddr = dst; }
+    std::unordered_map<uint16_t, double> _ev_ecn_ema;
+    std::unordered_map<uint16_t, uint8_t> _ev_level;
 
     // Functions from UecTransportConnection
     virtual void continueConnection() override;
@@ -236,6 +239,8 @@ public:
     static bool _debug;
     static bool _shown;
     bool _debug_src;
+
+
     bool debug() const { return _debug_src; }
 
    private:
